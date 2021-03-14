@@ -1,0 +1,33 @@
+Purpose:
+
+Use Jenkins, Jenkins Pipeline, GitHub, Git, Docker, DockerHub, java and maven to build a jar, run the jar as part of a generated a docker image, save the generated image to docker hub and finally pull and run the docker container. The process should be automated and detect if there are any source changes.
+
+Steps:
+
+1) Install Jenkins (Done during lab session)
+2) Install Docker (Done during lab session)
+3) Use visudo to allow jenkins access to password.sh 
+4) Use visudo to allow jenkins access to /usr/bin/docker
+5) From GitHub, fork repo LabelOrg/java-maven-junit-helloworld
+6) From terminal, "git clone <address>"
+7) Modified pom.xml to set default run class, git commit, git push  
+8) Create jenkins project 'DevOpsProject1'
+9) Set 'Poll SCM' schedule to '* * * * *'
+10) Set git repo address
+11) Create Jenkinsfile, git add, git commit, git push, save
+    a. Stage Builds
+    	i. Pull the source from github
+    	ii. Use mvn to build the java app
+    	iii. Use docker.build to build the docker image described inthe Dockerfile
+    b. Stage Deploy
+        i. Login to docker hub
+        ii. Push the the image to hub.docker.com
+        iii. Remove the recently built image from local machine
+    c. Stage Pull-Run
+        i. Pull the image from docker hub
+        ii. Run the docker image as a daemon
+    d. Stage Clean-up
+        i. Prune docker images
+
+
+
